@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_DIRECTFLOW_H
@@ -733,6 +733,10 @@ operator<<(std::ostream& os, const flow_status_t & enum_val) {
       os << "FLOW_REJECTED";
    } else if (enum_val==FLOW_PENDING) {
       os << "FLOW_PENDING";
+   } else if (enum_val==FLOW_HW_TABLE_PENDING) {
+      os << "FLOW_HW_TABLE_PENDING";
+   } else if (enum_val==FLOW_REQUEST_ACCEPTED) {
+      os << "FLOW_REQUEST_ACCEPTED";
    } else {
       os << "Unknown value";
    }

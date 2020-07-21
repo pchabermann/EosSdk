@@ -95,15 +95,34 @@ class EOS_SDK_PUBLIC nexthop_group_handler :
    /// Handler called when the active status of a nexthop_group changes
    virtual void on_nexthop_group_active(std::string const & nexthop_group_name,
                                         bool active);
+
+   /**
+    * Handler called when the nexthop_group is programmed in response to a
+    * configuration change.
+    */
+   virtual void on_nexthop_group_programmed(std::string const & nexthop_group_name);
 };
 
 class nexthop_group_iter_impl;
 
+// An iterator that yields nexthop group for each configured nexthop group
 class EOS_SDK_PUBLIC nexthop_group_iter_t :
       public iter_base<nexthop_group_t, nexthop_group_iter_impl> {
  private:
    friend class nexthop_group_iter_impl;
    explicit nexthop_group_iter_t(nexthop_group_iter_impl * const) EOS_SDK_PRIVATE;
+};
+
+class programmed_nexthop_group_iter_impl;
+
+// An iterator that yields nexthop group name for each programmed nexthop group
+class EOS_SDK_PUBLIC programmed_nexthop_group_iter_t :
+      public iter_base<std::string, programmed_nexthop_group_iter_impl> {
+ private:
+   friend class programmed_nexthop_group_iter_impl;
+
+   explicit programmed_nexthop_group_iter_t(
+         programmed_nexthop_group_iter_impl * const) EOS_SDK_PRIVATE;
 };
 
 /**
@@ -163,6 +182,15 @@ class EOS_SDK_PUBLIC nexthop_group_mgr :
    virtual void nexthop_group_set(nexthop_group_t const &) = 0;
    /// Removes the named nexthop group from the configuration if it exists
    virtual void nexthop_group_del(std::string const & nexthop_group_name) = 0;
+
+   // Iterate over all successfully programmed nexthop groups.
+   virtual programmed_nexthop_group_iter_t
+      programmed_nexthop_group_iter() const = 0;
+
+   // Returns the programmed nexthop group for a given nexthop group name.
+   virtual nexthop_group_t
+      programmed_nexthop_group(std::string const & nexthop_group_name)
+      const = 0;
  protected:
    nexthop_group_mgr() EOS_SDK_PRIVATE;
    friend class nexthop_group_handler;

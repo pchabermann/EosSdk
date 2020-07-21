@@ -48,6 +48,17 @@ class nexthop_group_mgr_impl : public nexthop_group_mgr {
    void nexthop_group_del(std::string const & group_name) {
       // TODO: No op impl.
    }
+
+   programmed_nexthop_group_iter_t programmed_nexthop_group_iter() const {
+      programmed_nexthop_group_iter_t * nop = 0;
+      return *nop;  // TODO: No op impl.
+   }
+
+   nexthop_group_t programmed_nexthop_group(
+         std::string const & nexthop_group_name) const {
+      return nexthop_group_t();
+   }
+
 };
 
 DEFINE_STUB_MGR_CTOR(nexthop_group_mgr);
@@ -70,6 +81,11 @@ nexthop_group_handler::watch_nexthop_group(std::string const & group_name,
 void
 nexthop_group_handler::on_nexthop_group_active(std::string const & group_name,
                                                bool active) {
+   // TODO: No op impl.
+}
+
+void
+nexthop_group_handler::on_nexthop_group_programmed(std::string const & group_name) {
    // TODO: No op impl.
 }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_DIRECTFLOW_H
@@ -361,6 +361,10 @@ enum flow_status_t {
    FLOW_REJECTED,
    /** Flow requesting hardware resources. */
    FLOW_PENDING,
+   /** Flow request submitted for tcam resource entry. */
+   FLOW_HW_TABLE_PENDING,
+   /** Flow request accepted. */
+   FLOW_REQUEST_ACCEPTED,
 };
 /** Appends a string representation of enum flow_status_t value to the ostream. */
 std::ostream& operator<<(std::ostream& os, const flow_status_t & enum_val);
